@@ -48,6 +48,7 @@ button[data-idx] {
     border: 0;
     background-color: rgb(140, 149, 165);
     vertical-align: middle;
+	margin: 4.9% 0;
 }
 
 svg {

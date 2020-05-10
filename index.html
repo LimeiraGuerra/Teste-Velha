@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <title>Jogo da Velha</title>
+    
+</head>
+<body>
+    <main>
+        <div class="results">
+            <h1>EMPATE</h1>
+        </div>
+        <div>
+            <table>
+                <tr class="linha topo">
+                    <td class="campo esq"><button data-idx="00"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                    <td class="campo meioV"><button data-idx="01"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                    <td class="campo dir"><button data-idx="02"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                </tr>
+                <tr class="linha meioH">
+                    <td class="campo esq"><button data-idx="10"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                    <td class="campo meioV"><button data-idx="11"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                    <td class="campo dir"><button data-idx="12"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                </tr>
+                <tr class="linha base">
+                    <td class="campo esq"><button data-idx="20"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                    <td class="campo meioV"><button data-idx="21"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                    <td class="campo dir"><button data-idx="22"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg></button></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
+
+<script src="codigo.js"></script>

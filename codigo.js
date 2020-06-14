@@ -2,6 +2,8 @@ var jogo = [[0, 0, 0],
             [0, 0, 0],
             [0, 0, 0]];
 
+var lastPlay = "", turn = 0;
+
 var iconX = `<path d="M23.954 22.03l-10.184-10.095 10.092-10.174-1.832-1.807-10.09 10.179-10.176-10.088-1.81 1.81 10.186 10.105-10.095 10.184 1.81 1.81 10.112-10.192 10.18 10.1z"/>`;
 var iconO = `<path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12z"/>`;
 
@@ -9,6 +11,7 @@ function resetGame(){
     jogo = [[0, 0, 0], 
             [0, 0, 0],
             [0, 0, 0]];
+    turn = 0;
     document.querySelectorAll("button").forEach(function(btn){
         btn.querySelector('svg').innerHTML = "";
         btn.style.backgroundColor = "rgb(140, 149, 165)";
@@ -78,13 +81,42 @@ function nextPlay(possibles){
     else{
         let defaultOrderMoves = [[0, 0], [0, 2], [2, 2], [2, 0], [0, 1], [1, 2], [2, 1], [1, 0]];
         let direction = 1;
-        if (jogo[1][1] === 0) {
-            placePlay([1, 1]);
-            return;
+        if (turn === 1) {
+            if (jogo[1][1] === 0) {
+                placePlay([1, 1]);
+                return;
+            }
+            else if (jogo[1][1] === 5) {
+                direction = -1;
+            }
         }
-        else if (jogo[1][1] === 5) {
-            direction = -1;
+        else if (turn === 2) {
+            if (lastPlay.toString() === "0,1" || lastPlay.toString() === "2,1") {
+                let xy = [lastPlay[0], lastPlay[1]-1];
+                if (jogo[xy[0]][xy[1]] === 0){
+                    placePlay(xy);
+                    return;
+                }
+                else {
+                    xy = [lastPlay[0], lastPlay[1]+2];
+                    placePlay(xy);
+                    return;
+                }
+            }
+            else if (lastPlay.toString() === "1,0" || lastPlay.toString() === "1,2"){
+                let xy = [lastPlay[0]-1, lastPlay[1]];
+                if (jogo[xy[0]][xy[1]] === 0){
+                    placePlay(xy);
+                    return;
+                }
+                else {
+                    xy = [lastPlay[0]+2, lastPlay[1]];
+                    placePlay(xy);
+                    return;
+                }
+            }
         }
+        
         let i = direction > 0 ? 0 : defaultOrderMoves.length - 1
         let stop = direction > 0 ? defaultOrderMoves.length : -1
         for (; i != stop; i += direction) {
@@ -161,7 +193,9 @@ document.querySelector("table").addEventListener("click", function(e){
     if(btnTag != null && btnTag.querySelector("svg").innerHTML === "" && !btnTag.disabled){
         btnTag.querySelector("svg").innerHTML = iconX;
         let xy = btnTag.getAttribute("data-idx");
-        jogo[xy.charAt(0)][xy.charAt(1)] = 2;
+        lastPlay = [xy.charAt(0), xy.charAt(1)];
+        turn++;
+        jogo[lastPlay[0]][lastPlay[1]] = 2;
         checkGame(true);
     }
 });
